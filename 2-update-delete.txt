@@ -1,0 +1,25 @@
+===================================================
+=== 2. Добавление, обновление и удаление данных ===
+===================================================
+
+*) Добавление данных
+
+- INSERT INTO table_name (col_1, col_2, col_3) VALUES (val_1, val_2, val_3);
+- INSERT INTO table_name SET col_1=val_1, col_2=val_2;
+
+- INSERT INTO table_name (col_1, col_2, col_3)
+  VALUES
+   (val_1, val_2, val_3),
+   (val_4, val_5, val_6);
+
+*) Обновление данных
+
+- UPDATE table_name SET col_1=val_1 WHERE condition ORDER BY col LIMIT number;
+
+*) Удаление данных
+
+- DELETE FROM table_name WHERE condition;
+
+*) Удалить таблицу вместе с данными
+- DROP TABLE table_name;
+

@@ -1,0 +1,69 @@
+===========================
+=== 3. Создание таблиц  ===
+===========================
+
+- CREATE TABLE table_name (
+    column_1 TYPE_1,
+    column_2 TYPE_2,
+    column_3 TYPE_3
+)
+
+* Целочисленные типы:
+ TINYINT
+ SMALLINT
+ MEDIUMINT
+ INT
+ BIGINT
+
+ могут быть UNSIGNED: пример, id INT UNSIGNED
+ диапазоны см. https://dev.mysql.com/doc/refman/5.7/en/integer-types.html
+
+* Вещественные числа:
+ FLOAT (+- 1.17 x 10 ^ -39 ... +- 3.40 x 10 ^ 38 )
+ DOUBLE (+- 2.22 x 10 ^ -308 ... +- 1.79 x 10 ^ 308 )
+ DECIMAL (фиксированная точность, применяется для финансовых операций)
+
+
+* Строковые поля:
+ VARCHAR максимальное кол-во символов 65535
+ TEXT максимальное кол-во символов 65535
+ MEDIUMTEXT максимальное кол-во символов 16777215
+ LONGTEXT максимальное кол-во символов 4294967295
+
+ Для хранения двоичных объектов (изображения, звуки, электронные документы). Но лучше не хранить в БД такие данные, а хранить путь до них:
+  BLOB
+  MEDIUMBLOB
+  LONGBLOB
+
+* Дата и время
+ DATE 1000-01-01 ... 9999-12-31
+
+ DATETIME 1000-01-01 ... 9999-12-31
+   чтобы использовать милисекунды и микросекунды, нужно при создании таблицы добавить к DATETIME точность - DATETIME(3) и DATETIME(6) соответственно
+
+ TIME можно с точностью
+ YEAR можно с точностью
+
+* NULL
+ при создании таблицы можно указать какие поля могут не иметь значений
+ пример:
+   create table table_name (id INT UNSIGNED NOT NULL, name VARCHAR(20) NULL);
+
+* BOOL, ENUM, SET
+
+  BOOL - на самом деле это TINYINT, который хранит 0 или 1
+
+  ENUM - строковый тип с предопределёнными строками
+
+  SET - как ENUM, но может хранить несколько значений 
+  для поиска по сету используем функцию FIND_IN_SET
+  пример:
+   SELECT * FROM rooms WHERE FIND_IN_SET('wifi', facilities);
+   SELECT * FROM rooms WHERE FIND_IN_SET('wifi', facilities) AND FIND_IN_SET('tv', facilities);
+
+* Значения по умолчанию
+ при создании таблицы указываем атрибут DEFAULT со значением
+ пример:
+  ...
+  name VARCHAR(20) NOT NULL DEFAULT "",
+  ...
