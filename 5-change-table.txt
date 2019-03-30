@@ -1,0 +1,42 @@
+===========================
+=== 5. Изменение таблиц ===
+===========================
+
+Добавить столбец в уже существующую таблицу:
+
+ ALTER TABLE <table_name> ADD COLUMN <column_name> ... (строка, как при создании столбца при создании таблицы - полное описание стобца)
+ пример:
+ ALTER TABLE users ADD COLUMN birthday DATE NULL DEFAULT NULL
+
+
+Удалить столбец:
+ ALTER TABLE <table_name> DROP COLUMN <column_name>
+
+
+Добавить несколько колонок:
+ ALTER TABLE <table_name>
+ ADD COLUMN ... ,
+ ADD COLUMN ... ,
+ ADD COLUMN ... ,
+ ...
+
+
+Изменить тип столбца:
+
+ ALTER TABLE <table_name> MODIFY <column_name> <new_type> ...(строка, как при создании столбца при создании таблицы)
+
+Изменить имя стобца и тип столбца:
+
+ ALTER TABLE <table_name> CHANGE <old_column_name> <new_column_name> <new_type> <полное_описание_столбца>
+
+Добавить уникальный индекс:
+ ALTER TABLE <table_name>
+ ADD UNIQUE KEY <index_name>(<column_name_1>, <column_name_2>, ...)
+
+
+Изменение таблицы:
+
+ Одну:
+   RENAME TABLE <old_table_name> TO <new_table_name>
+ Несколько:
+   RENAME TABLE <old_table_name> TO <new_table_name>, <another_old_table_name> TO <another_new_table_name>, ...
