@@ -40,3 +40,7 @@
    RENAME TABLE <old_table_name> TO <new_table_name>
  Несколько:
    RENAME TABLE <old_table_name> TO <new_table_name>, <another_old_table_name> TO <another_new_table_name>, ...
+
+
+Изменить порядок столбцов:
+ ALTER TABLE table_name MODIFY COLUMN col1_name col1_type AFTER col2_name;
