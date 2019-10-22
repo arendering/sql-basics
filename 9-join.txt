@@ -1,0 +1,28 @@
+-- UNION
+
+Все SELECT запросы должны возвращать одинаковое кол-во столбцов:
+
+  SELECT DATE_FORMAT(date, "%d.%m.%y") as date, amount, 'bank' as payment_type 
+    FROM bank_transactions WHERE client_id = 56
+  UNION
+  SELECT DATE_FORMAT(date, "%d.%m.%y"), amount, 'cash'
+    FROM cashbox_transactions WHERE client_id = 56;
+
+Оборачиваем в скобки SELECT, если хотим сортировать итоговую выборку:
+
+  (SELECT date, amount, 'cash' AS pt FROM cashbox_transactions)
+  UNION
+  (SELECT date, amount, 'paypal' AS pt FROM paypal_transactions)
+  ORDER BY date DESC;
+
+Группировка:
+
+  SELECT year, month, SUM(amount) AS month_amount 
+  FROM (
+    SELECT year(date) AS year, month(date) AS month, amount FROM bank_transactions
+    UNION
+    SELECT year(date) AS year, month(date) AS month, amount FROM cashbox_transactions
+    UNION
+    SELECT year(date) AS year, month(date) AS month, amount FROM paypal_transactions) t
+  GROUP BY year, month
+  ORDER BY year, month
