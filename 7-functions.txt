@@ -37,4 +37,5 @@ day() - получить день
  SELECT * FROM users
  WHERE date_joined > NOW() - INTERVAL 7 DAY;
 
-date_format(<date>, "%d.%m.%Y %H:%i")
+форматирование даты:
+ DATE_FORMAT(<date>, "%d.%m.%Y %H:%i")
