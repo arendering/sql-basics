@@ -16,10 +16,23 @@
 
 - UPDATE table_name SET col_1=val_1 WHERE condition ORDER BY col LIMIT number;
 
+Для нескольких таблиц, связанных отношением 1 к 1:
+- UPDATE users AS u, users_data AS ud
+  SET
+    u.last_name = 'Абрамова',
+    ud.bio = 'Биография Натальи Абрамовой'
+  WHERE u.id = 3 AND u.id = ud.id
+
 *) Удаление данных
 
 - DELETE FROM table_name WHERE condition;
 
-*) Удалить таблицу вместе с данными
-- DROP TABLE table_name;
+Из одной таблицы по условию из другой
+- DELETE FROM table2
+  USING table1 JOIN table2
+  WHERE 
+  table2.id = table1.id AND table1.id < 10;
 
+*) Удалить таблицу вместе с данными
+
+- DROP TABLE table_name;
