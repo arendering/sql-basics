@@ -37,3 +37,18 @@
 2. Один ко многим
 3. Многие ко многим
 
+--- Внешний ключ (FOREIGN KEY)
+ это столбец или комбинация столбцов, значения которых соответствуют первичному ключу в другой таблице.  Он используется для соединения 2-ух таблиц.
+
+  CREATE TABLE users_data (
+    id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    bio TEXT,
+    FOREIGN KEY (id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
+  )
+
+
+LAST_INSERT_ID() - возвращает id последнего успешного INSERT запроса (во всей базе)
+
+ Пример:
+  INSERT INTO users_data(id, bio)
+  VALUES (LAST_INSERT_ID(), 'Биография');
