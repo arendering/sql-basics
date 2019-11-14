@@ -44,3 +44,8 @@
 
 Изменить порядок столбцов:
  ALTER TABLE table_name MODIFY COLUMN col1_name col1_type AFTER col2_name;
+
+Добавить внешний ключ (колонка уже должна существовать!) :
+ ALTER TABLE <table_name>
+ ADD FOREIGN KEY (<key_name>) REFERENCES <other_table>(<other_id>)
+ ON DELETE SET NULL;
