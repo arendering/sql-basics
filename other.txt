@@ -3,3 +3,13 @@
  SELECT o.*
  FROM orders o
  WHERE ...
+
+*) функция IFNULL(value1, value2). 
+Если value1 не NULL то функция вернет его, если value1 равен NULL, то функция вернет value2
+ Пример:
+ SELECT c.name as category, IFNULL(SUM(p.count), 0) as products
+ FROM categories c
+ LEFT JOIN products p
+ ON c.id = p.category
+ GROUP BY c.id
+ ORDER BY c.name;
