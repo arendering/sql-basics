@@ -33,9 +33,9 @@ year() - получить год
 month() - получить месяц
 day() - получить день
 
-интервал:
+--- Интервал:
  SELECT * FROM users
  WHERE date_joined > NOW() - INTERVAL 7 DAY;
 
-форматирование даты:
+--- Форматирование даты:
  DATE_FORMAT(<date>, "%d.%m.%Y %H:%i")

@@ -1,0 +1,49 @@
+--- Вложенные запросы ---
+
+Пример:
+    SELECT * FROM users WHERE id IN (
+        SELECT user_id FROM orders WHERE amount IN (
+            SELECT MAX(amount) FROM orders WHERE status = 'completed'
+        )
+    )
+    ORDER BY id
+
+1) Если подзапрос вернул одно значение, то можно использовать >, <, =
+2) Если подзапрос вернул несколько значений, то используем IN, ANY, ALL
+3) EXISTS проверяет содержит ли подзапрос какие-либо строки
+ Пример:
+ select * from users where not exists (
+    select * from users_roles where users_roles.user_id = users.id
+ )
+ order by id
+
+
+DISTINCT - ключевое слово для того чтобы извлекать только уникльные значения
+    Пример:
+    SELECT DISTINCT user_id FROM orders WHERE status = 'success' - user_id будут уникальными в выборке
+
+--- Вложенный запрос с несколькими столбцами ---
+Пример:
+  SELECT * FROM prices WHERE (id, price) IN (
+      SELECT * from old_prices
+  )
+
+
+--- Подзапросы в конструкции FROM ---
+Пример:
+ SELECT * FROM (SELECT * FROM cars ORDER BY price DESC LIMIT 5) as best_cars
+ ORDER BY price
+
+
+--- Подзапросы в конструкции INSERT ---
+INSERT IGNORE INTO paypal_payments (
+    SELECT id, user_id, date, amount FROM payments
+    WHERE source = 'paypal'
+)
+
+или 
+
+REPLACE INTO paypal_payments (
+    SELECT id, user_id, date, amount FROM payments
+    WHERE source = 'paypal'
+)
